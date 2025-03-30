@@ -1,0 +1,34 @@
+{
+  "canisters": {
+    "scheduler_backend": {
+      "main": "src/scheduler_backend/main.mo",
+      "type": "motoko"
+    },
+    "scheduler_repository_events": {
+      "main": "src/scheduler_backend/repositories/events.mo",
+      "type": "motoko"
+    },
+    "scheduler_repository_event_grouos": {
+      "main": "src/scheduler_backend/repositories/events_groups.mo",
+      "type": "motoko"
+    },
+    "scheduler_frontend": {
+      "dependencies": [
+        "scheduler_backend"
+      ],
+      "source": [
+        "src/scheduler_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "scheduler_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": "mops sources"
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}

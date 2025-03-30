@@ -1,0 +1,25 @@
+.root{
+    display: flex;
+    flex-direction: row;
+    padding: 2em;
+}
+
+.event-item-root{
+    color: black;
+    border: solid 1px gray;
+    border-radius: 5px;
+    padding: 0.5em;
+    margin-top: 1em;
+}
+
+.ftco-section{
+    width: 100%;
+}
+
+.events-container{
+    width: 25vw;
+}
+
+.has-events{
+    background-color: #1c7430 !important;
+}
