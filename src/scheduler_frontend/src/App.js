@@ -22,7 +22,7 @@ class App {
                 return parseInt(a.time.getTime()) - parseInt(b.time.getTime())
             })
             events.forEach(event => {
-                eventsContainer.append(displayEvent(event))
+                eventsContainer.append(this.displayEvent(event))
             })
         }
 
@@ -43,8 +43,8 @@ class App {
                 let updatedList = this.eventsOfMonth.get(datetime.getDate())
                 if(updatedList == null) updatedList = []
                 updatedList.push({
-                    name : event.eventName,
-                    description : event.eventDescription,
+                    name : event.name,
+                    description : event.description,
                     time : datetime
                 })
                 this.eventsOfMonth.set(datetime.getDate(), updatedList)
@@ -72,7 +72,7 @@ class App {
         const eventDescription = document.createElement("P")
         eventDescription.innerText  = event.description
         const time = document.createElement("P")
-        time.innerText = event.time.getHours()+":"+event.time.getMinutes()
+        time.innerText = "Time: "+event.time.getHours()+":"+event.time.getMinutes()
         rootEl.insertBefore(name, null)
         rootEl.insertBefore(eventDescription, name)
         rootEl.insertBefore(time, eventDescription)
