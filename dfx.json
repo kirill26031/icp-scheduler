@@ -2,7 +2,11 @@
   "canisters": {
     "scheduler_backend": {
       "main": "src/scheduler_backend/main.mo",
-      "type": "motoko"
+      "type": "motoko",
+      "dependencies": [
+        "scheduler_repository_events",
+        "scheduler_repository_event_grouos"
+      ]
     },
     "scheduler_repository_events": {
       "main": "src/scheduler_backend/repositories/events.mo",
