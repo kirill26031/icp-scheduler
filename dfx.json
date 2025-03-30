@@ -4,8 +4,12 @@
       "main": "src/scheduler_backend/main.mo",
       "type": "motoko"
     },
-    "scheduler_repository": {
+    "scheduler_repository_events": {
       "main": "src/scheduler_backend/repositories/events.mo",
+      "type": "motoko"
+    },
+    "scheduler_repository_event_grouos": {
+      "main": "src/scheduler_backend/repositories/events_groups.mo",
       "type": "motoko"
     },
     "scheduler_frontend": {

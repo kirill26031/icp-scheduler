@@ -7,8 +7,28 @@ module {
         _description: ?Text,
         _ownerUserId: UUID.UUID
     ) {
-        public var id: UUID.UUID = _id;
-        public var name: Text = _name;
-        public var description: ?Text = _description;
-    }
+        public let id: UUID.UUID = _id;
+        public let name: Text = _name;
+        public let description: ?Text = _description;
+        public let ownerUserId: UUID.UUID = _ownerUserId;
+    };
+
+    public class CreateEventGroupDto(
+        _name: Text,
+        _description: ?Text,
+        _ownerUserId: UUID.UUID
+    ) {
+        public let name: Text = _name;
+        public let description: ?Text = _description;
+        public let ownerUserId: UUID.UUID = _ownerUserId;
+    };
+
+    public func dtoToEvent(dto: CreateEventGroupDto, id: UUID.UUID) : EventGroup {
+        return EventGroup(
+          id,
+          dto.name,
+          dto.description,
+          dto.ownerUserId
+        );
+      };
 }
