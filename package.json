@@ -14,5 +14,10 @@
   "type": "module",
   "workspaces": [
     "src/scheduler_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.3",
+    "jquery": "^3.7.1"
+  }
 }

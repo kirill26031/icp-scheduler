@@ -34,8 +34,8 @@ persistent actor EventsRepository {
         for ((id: UUID.UUID, event: Event.Event) in Map.entries(events)) {
             if (Array.find(groupIds: [UUID.UUID],func(groupId: UUID.UUID): Bool {groupId == event.eventGroupId}) != null and
                 ( event.startEventDate < endDate and event.endEventDate > startDate)
-                ) {
-                    chosenEvents := Array.append(chosenEvents, [event]);
+            ) {
+                chosenEvents := Array.append(chosenEvents, [event]);
             }
         };
         return chosenEvents;

@@ -1,0 +1,11 @@
+body {
+    padding-top: 60px;
+}
+#header {
+     border-bottom: solid 1px lightgray;
+}
+
+#header button.nav-link{
+     background-color: transparent;
+     border-width: 0;
+}

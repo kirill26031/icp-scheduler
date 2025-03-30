@@ -23,7 +23,15 @@ export default defineConfig({
         changeOrigin: true,
       },
     },
+    headers: {
+      "Content-Security-Policy":
+        "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';",
+    },
   },
+  // define: {
+  //   "window.jQuery": "jquery",
+  //   "$": "jquery"
+  // },
   publicDir: "assets",
   plugins: [
     environment("all", { prefix: "CANISTER_" }),
