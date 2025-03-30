@@ -14,8 +14,8 @@ module {
         _isReoccurring: Bool,
         _freq: ?EventFreq,
         _eventGroupId: UUID.UUID,
-        _startEventDate: ?Time.Time,
-        _endEventDate: ?Time.Time
+        _startEventDate: Time.Time,
+        _endEventDate: Time.Time
       ) {
         public let id: UUID.UUID = _id;
         public let name: Text = _name;
@@ -24,8 +24,8 @@ module {
         public let isReoccurring: Bool = _isReoccurring;
         public let freq: ?EventFreq = _freq;
         public let eventGroupId: UUID.UUID = _eventGroupId;
-        public let startEventDate: ?Time.Time = _startEventDate;
-        public let endEventDate: ?Time.Time = _endEventDate;
+        public let startEventDate: Time.Time = _startEventDate;
+        public let endEventDate: Time.Time = _endEventDate;
       };
 
       public class CreateEventDTO(
@@ -35,8 +35,8 @@ module {
         _isReoccurring: Bool,
         _freq: ?EventFreq,
         _eventGroupId: UUID.UUID,
-        _startEventDate: ?Time.Time,
-        _endEventDate: ?Time.Time
+        _startEventDate: Time.Time,
+        _endEventDate: Time.Time
       ) {
         public let name: Text = _name;
         public let description: ?Text = _description;
@@ -44,8 +44,8 @@ module {
         public let isReoccurring: Bool = _isReoccurring;
         public let freq: ?EventFreq = _freq;
         public let eventGroupId: UUID.UUID = _eventGroupId;
-        public let startEventDate: ?Time.Time = _startEventDate;
-        public let endEventDate: ?Time.Time = _endEventDate;
+        public let startEventDate: Time.Time = _startEventDate;
+        public let endEventDate: Time.Time = _endEventDate;
       };
 
       public func dtoToEvent(dto: CreateEventDTO, id: UUID.UUID) : Event {

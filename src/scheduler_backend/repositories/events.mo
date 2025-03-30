@@ -1,6 +1,7 @@
 import Map "mo:map/Map";
 import Set "mo:map/Set";
 import Time "mo:base/Time";
+import Array "mo:base/Array";
 
 import { hash } "../types/UUID";
 import Event "../types/Event";
@@ -16,8 +17,28 @@ persistent actor EventsRepository {
         else return null;
     };
 
+    public query func getAll() : async [Event.Event] {
+        var chosenEvents: [Event.Event] = [];
+        for ((id: UUID.UUID, event: Event.Event) in Map.entries(events)) {
+            chosenEvents := Array.append(chosenEvents, [event]);
+        };
+        return chosenEvents;
+    };
+
     public query func existsById(eventId: UUID.UUID) : async Bool {
         return Map.has(events, hash, eventId);
+    };
+
+    public query func eventsInRangeAndInGroups(startDate: Time.Time, endDate: Time.Time, groupIds: [UUID.UUID]) : async [Event.Event] {
+        var chosenEvents: [Event.Event] = [];
+        for ((id: UUID.UUID, event: Event.Event) in Map.entries(events)) {
+            if (Array.find(groupIds: [UUID.UUID],func(groupId: UUID.UUID): Bool {groupId == event.eventGroupId}) != null and
+                ( event.startEventDate < endDate and event.endEventDate > startDate)
+                ) {
+                    chosenEvents := Array.append(chosenEvents, [event]);
+            }
+        };
+        return chosenEvents;
     };
 
 
