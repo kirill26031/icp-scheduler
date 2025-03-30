@@ -2,7 +2,6 @@ import Map "mo:map/Map";
 import Set "mo:map/Set";
 import Time "mo:base/Time";
 import Array "mo:base/Array";
-import Debug "mo:base/Debug";
 
 import { hash } "../types/UUID";
 import Event "../types/Event";

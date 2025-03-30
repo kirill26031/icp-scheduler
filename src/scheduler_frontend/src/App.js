@@ -2,17 +2,21 @@ import { scheduler_backend } from 'declarations/scheduler_backend';
 
 class App {
 
-  eventsOfMonth = new Map();
-  currentYear;
-  currentMonth;
+  constructor() {
+    this.eventsOfMonth = new Map();
+    this.currentYear = 2025;
+    this.currentMonth = 3;
+
+    document.querySelector('#logout').addEventListener('click', this.logout);
+  }
 
   displayEventsAt = async function(year, month, day){
-        if(year !== currentYear || month !== currentMonth){
+        if(year !== this.currentYear || month !== this.currentMonth){
             await loadEvents(year, month)
         }
         const eventsContainer = document.querySelector('.events-container')
         eventsContainer.innerHTML=""
-        const events = eventsOfMonth.get(day)
+        const events = this.eventsOfMonth.get(day)
         if(events !== undefined){
             events.sort((a, b)=>{
                 return parseInt(a.time.getTime()) - parseInt(b.time.getTime())
@@ -27,28 +31,35 @@ class App {
     loadEvents = async function (year, month){
         const eventsContainer = document.querySelector('.events-container')
         eventsContainer.innerHTML=""
-        fetch('/api/events/by-month/'+year+'/'+month)
-        .then(res => res.json())
+        
+        scheduler_backend.getAllEventsInRange(year, month)
         .then(r => {
-            currentMonth = month
-            currentYear = year
-            eventsOfMonth.clear()
-            r.data.forEach(event => {
-                let datetime = new Date(event.nextEventDate)
-                let updatedList = eventsOfMonth.get(datetime.getDate())
+            this.currentMonth = month
+            this.currentYear = year
+            this.eventsOfMonth.clear()
+            r.forEach(event => {
+                console.log(event)
+                let datetime = new Date(Number(event.startEventDate) / 1_000_000)
+                let updatedList = this.eventsOfMonth.get(datetime.getDate())
                 if(updatedList == null) updatedList = []
                 updatedList.push({
                     name : event.eventName,
                     description : event.eventDescription,
                     time : datetime
                 })
-                eventsOfMonth.set(datetime.getDate(), updatedList)
+                this.eventsOfMonth.set(datetime.getDate(), updatedList)
+                console.log(updatedList)
             })
             for(let i=1; i<32; i = parseInt(parseInt(i)+parseInt(1))){
-                document.querySelector('.day-'+i).className =
-                    eventsOfMonth.has(i) ?
-                        document.querySelector('.day-'+i).className += " has-events" :
-                    document.querySelector('.day-'+i).className.replace('has-events', '')
+                let dayElem = document.querySelector('.day-'+i)
+                if (!dayElem) {
+                    console.error("Day element is absent " + i)
+                    continue
+                }
+                dayElem.className =
+                this.eventsOfMonth.has(i) ?
+                    dayElem.className += " has-events" :
+                    dayElem.className.replace('has-events', '')
             }
         })
     }
@@ -76,10 +87,6 @@ class App {
       sessionStorage.removeItem('token')
       document.cookie+=";max-age=0"
       window.location='/'
-    }
-
-    constructor() {
-      document.querySelector('#logout').addEventListener('click', this.logout);
     }
 }
 
